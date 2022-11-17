@@ -76,8 +76,9 @@
       }
     </style>
   </head>
-  <body onload="paste_name()">
+  <body onload="paste_name(),load_for_spec()">
     <div class="container-area">
+      <audio id="sword" src="voices/sword-sound-2-36274.mp3" autoplay></audio>
       <img
         src="Photos/effects/slash-image-removebg-preview.png"
         alt="slash"
@@ -93,7 +94,11 @@
         <div class="champion-side">
           <div class="champion-info">
             <div class="champion-info-image">
-              <img src="Photos/small-img/warrior-small-img.png" alt="" />
+              <img
+                src="Photos/small-img/warrior-small-img.png"
+                alt=""
+                id="small-champion-image"
+              />
             </div>
             <div style="margin-left: 10px">
               <div class="champion-info-name">
@@ -133,7 +138,7 @@
           </button>
           <button type="button" class="btn btn-primary">Skill</button>
           <button type="button" class="btn btn-success">Relax</button>
-          <a href="warrior-town.html">
+          <a id="flee" href="">
             <button type="button" class="btn btn-secondary">Flee</button></a
           >
         </div>
@@ -181,6 +186,7 @@
       let stopMonsterAttackGo;
       let iChampion = 260;
       let iMonster = 260;
+      let swordVoice = document.getElementById("sword");
 
       function attackGo() {
         if (i < 480) {
@@ -188,8 +194,10 @@
           championİmage.style.left = i + "px";
         }
         if (i === 480) {
+          attack_voice();
           attackEffectChampion.style.display = "inline-block";
           setTimeout(display_attack_effect, 250);
+
           if (iChampion <= 40) {
             monsterHealth.style.width = 0 + "px";
             monsterHealth.style.background = "white";
@@ -223,6 +231,7 @@
           monsterİmage.style.right = i + "px";
         }
         if (i === 480) {
+          attack_voice();
           attackEffectMonster.style.display = "inline-block";
           setTimeout(display_attack_effect, 250);
           iMonster -= 20;
@@ -258,6 +267,16 @@
       function display_attack_effect() {
         attackEffectChampion.style.display = "none";
         attackEffectMonster.style.display = "none";
+      }
+      function attack_voice() {
+        if (championİmage.style.left === 480 + "px") {
+          swordVoice.src = "voices/sword-sound-2-36274.mp3";
+          swordVoice.play();
+        }
+        if (monsterİmage.style.right === 480 + "px") {
+          swordVoice.src = "voices/slime-squish-14539.mp3";
+          swordVoice.play();
+        }
       }
     </script>
     <script src="asd.js"></script>
